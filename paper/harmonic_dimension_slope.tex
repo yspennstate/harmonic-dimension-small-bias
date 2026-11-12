@@ -1,5 +1,5 @@
 \documentclass[11pt]{amsart}
-\usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage{amsmath,amssymb,amsthm,booktabs,longtable}
 \usepackage[margin=1.15in]{geometry}
 \usepackage{hyperref}
 \newtheorem{theorem}{Theorem}
@@ -18,7 +18,11 @@
 \title[Harmonic measure on Galton--Watson trees at small bias]{The dimension of harmonic measure on
 Galton--Watson trees increases at small bias}
 \author{Yitzchak Shmalo}
-\date{November 2026}
+\address{Einstein Institute of Mathematics, The Hebrew University of Jerusalem, Jerusalem, Israel}
+\email{yitzchak.shmalo@gmail.com}
+\date{12 November 2026}
+\subjclass[2020]{Primary 60J80; Secondary 60G50, 28A78}
+\keywords{Galton--Watson tree, biased random walk, harmonic measure, Hausdorff dimension}
 
 \begin{document}
 \begin{abstract}
@@ -26,34 +30,31 @@ Let $T$ be a Galton--Watson tree without leaves whose offspring number $N$ is no
 $m$, and let $d_\lambda$ be the Hausdorff dimension of the harmonic measure of the $\lambda$-biased random walk
 on $T$, $0\le\lambda<m$. Lyons, Pemantle and Peres asked whether $d_\lambda$ increases with $\lambda$. We prove
 that $\lambda\mapsto d_\lambda$ is continuously differentiable on $[0,k_0)$, where $k_0$ is the smallest value
-taken by $N$, and that
-\[
-   \frac{d}{d\lambda}d_\lambda\Big|_{\lambda=0}=-\bigl(1-\E[1/N]\bigr)\Cov\bigl(\log N,1/N\bigr)>0 .
-\]
-Hence $d_\lambda$ is strictly increasing on an interval $[0,\eps]$, with $\eps>0$ depending on the offspring
+taken by $N$, and that the derivative of $d_\lambda$ at $\lambda=0$ equals
+$-\bigl(1-\E[1/N]\bigr)\Cov\bigl(\log N,1/N\bigr)>0$. Hence $d_\lambda$ is strictly increasing on an interval $[0,\eps]$, with $\eps>0$ depending on the offspring
 law. No moment assumption beyond the finite mean is needed. The proof combines the formula of Lin and Rousselin
 for $d_\lambda$ with a contraction estimate, uniform over trees, for the recursion satisfied by the escape
 probabilities and by their derivatives in $\lambda$.
 \end{abstract}
 \maketitle
 
-\section{Introduction}
+\section{Introduction}\label{sec:intro}
 
 Let $(p_k)_{k\ge1}$ be a probability distribution on the positive integers with $p_k<1$ for every $k$ and finite
 mean $m=\sum_k kp_k$, so that $m>1$, and let $N$ denote a random variable with this distribution. Let $T$ be a
 Galton--Watson tree with offspring distribution $(p_k)$, rooted at $e$. Every vertex of $T$ has at least one
-child. We write $\nu(x)$ for the number of children of a vertex $x$ and
+child. We write $\nu(v)$ for the number of children of a vertex $v$ and
 \[
    k_0=\min\{k\ge1:\ p_k>0\}
 \]
 for the smallest possible number of children.
 
 For $\lambda\ge0$ the $\lambda$-biased random walk on $T$ starts at the root, moves from the root to a uniformly
-chosen child, and moves from a vertex $x\ne e$ to its parent with probability $\lambda/(\lambda+\nu(x))$ and to
-each of its children with probability $1/(\lambda+\nu(x))$. Lyons~\cite{Lyons90} proved that the walk is
+chosen child, and moves from a vertex $v\ne e$ to its parent with probability $\lambda/(\lambda+\nu(v))$ and to
+each of its children with probability $1/(\lambda+\nu(v))$. Lyons~\cite{Lyons90} proved that the walk is
 transient exactly when $\lambda<m$. In that case the walk converges to a random ray of $T$; the law of this ray,
 given $T$, is the $\lambda$-harmonic measure on the boundary $\partial T$ of $T$. The boundary carries the metric
-$d(\xi,\eta)=e^{-|\xi\wedge\eta|}$, where $|\xi\wedge\eta|$ is the number of edges common to the rays $\xi$ and
+$\operatorname{dist}(\xi,\eta)=e^{-|\xi\wedge\eta|}$, where $|\xi\wedge\eta|$ is the number of edges common to the rays $\xi$ and
 $\eta$. Lyons, Pemantle and Peres~\cite{LPP95,LPP96} proved that the Hausdorff dimension of the
 $\lambda$-harmonic measure is almost surely equal to a constant $d_\lambda$, and that $d_\lambda<\log m$, the
 dimension of $\partial T$. For $\lambda=0$ the walk never backtracks, the harmonic measure is the visibility
@@ -82,10 +83,10 @@ $\lambda\le k_0/\bigl(1+\sqrt{1-1/k_0}\bigr)$ when $k_0\ge2$ by Song, Wang and X
 Zhu~\cite{MSZ} compare, for large bias, the speeds on two trees whose offspring distributions are stochastically
 ordered. The regularity of the speed in $\lambda$ has been studied as well: Ben Arous, Hu, Olla and
 Zeitouni~\cite{BHOZ} proved, under an exponential moment assumption, the Einstein relation, which gives the derivative of the speed at the critical
-bias $\lambda=m$ in terms of the diffusivity of the critical walk, and Bowditch and Tokushige~\cite{BT} proved that
-the speed is differentiable at every $\lambda$ for which the walk is ballistic and satisfies a central limit
-theorem. All of these monotonicity results concern $\lambda<k_0$, which is also the range of
-Theorem~\ref{thm:main} below.
+bias $\lambda=m$ in terms of the diffusivity of the critical walk, and Bowditch and Tokushige~\cite{BT} proved that,
+on a supercritical Galton--Watson tree, the speed is differentiable at every $\lambda$ for which the walk is ballistic and satisfies a central limit
+theorem. The monotonicity results above concern small $\lambda$, and the explicit ranges among them lie in
+$[0,k_0)$, which is also the range of Theorem~\ref{thm:main} below.
 
 \begin{theorem}\label{thm:main}
 The function $\lambda\mapsto d_\lambda$ is continuously differentiable on $[0,k_0)$, with the one-sided
@@ -115,7 +116,8 @@ $d_0'=0.05496$ to five decimal places.
 
 \begin{remark}\label{rem:tilt}
 In the formula of Lin and Rousselin, $d_\lambda$ is the mean of $\log(\lambda+C_\lambda(T))$ under a probability
-measure on trees with an explicit density $W_\lambda$ with respect to the Galton--Watson measure; here
+measure on trees whose density with respect to the Galton--Watson measure is $\E[W_\lambda\mid T]/\E[W_\lambda]$,
+with $W_\lambda$ defined in Section~\ref{sec:proof}; here
 $C_\lambda(T)$ is the effective conductance of $T$. Both the function and the density depend on $\lambda$. At
 $\lambda=0$ the derivative of $\log(\lambda+C_\lambda(T))$ is
 $\bigl(1-\sum_{i\le\nu(e)}1/\nu(e_i)\bigr)/\nu(e)$, where $e_1,\dots,e_{\nu(e)}$ are the children of the root.
@@ -127,8 +129,8 @@ change of the density, which to first order favours trees whose root has many ch
 The escape probability of the walk from a tree is the fixed point of a recursion over the subtrees of the
 children of the root. Section~\ref{sec:escape} shows that, written for the logarithm of the escape probability
 and restricted to trees in which every vertex has at least $k$ children, this recursion is a contraction in the
-supremum norm with constant $\lambda/k$, uniformly in the tree, and that the same holds for the recursion
-obtained by differentiating in $\lambda$. This gives continuous differentiability of the escape probability of
+supremum norm with constant $\lambda/k$, uniformly in the tree, and that the recursion obtained by
+differentiating in $\lambda$ has the same contraction coefficient in its derivative variables. This gives continuous differentiability of the escape probability of
 every such tree on $[0,k)$, with a bound on the derivative that does not depend on the tree, and allows
 differentiation of the formula for $d_\lambda$ under the expectation. Section~\ref{sec:proof} contains the proof
 of Theorem~\ref{thm:main}, and Section~\ref{sec:numerics} reports a numerical evaluation of $d_\lambda$ for four
@@ -139,8 +141,8 @@ offspring distributions.
 For an integer $k\ge1$ let $\cT_k$ be the set of rooted trees in which every vertex has finitely many and at
 least $k$ children. For $T\in\cT_1$ let $T_*$ be the tree obtained by joining a new vertex $e_*$ to the root $e$
 of $T$, so that $e_*$ is the parent of $e$. For $\lambda\ge0$ consider the walk on $T_*$ that starts at $e$ and
-moves from every vertex $x\ne e_*$ to its parent with probability $\lambda/(\lambda+\nu(x))$ and to each child
-with probability $1/(\lambda+\nu(x))$. For $j\ge0$ let
+moves from every vertex $v\ne e_*$ to its parent with probability $\lambda/(\lambda+\nu(v))$ and to each child
+with probability $1/(\lambda+\nu(v))$. For $j\ge0$ let
 \begin{align*}
    b_j(T,\lambda)&=\Prob\bigl(\text{the walk reaches generation $j$ of $T$ before $e_*$}\bigr),\\
    \beta_\lambda(T)&=\Prob\bigl(\text{the walk never visits $e_*$}\bigr),
@@ -236,25 +238,25 @@ For $j\ge2$ subtract~\eqref{eq:yrec} for $j-1$ from~\eqref{eq:yrec} for $j$:
      +q_j\sum_iw_{j,i}\bigl(y_{j-1}-y_{j-2}\bigr)(T_i)
      +\sum_i\bigl(q_jw_{j,i}-q_{j-1}w_{j-1,i}\bigr)y_{j-2}(T_i).
 \]
-Since $|e^u-e^v|\le|u-v|$ for $u,v\le0$, we have $|b_{j-1}(T_i)-b_{j-2}(T_i)|\le\delta_{j-1}$ for every $i$ and
+Since $|e^s-e^t|\le|s-t|$ for $s,t\le0$, we have $|b_{j-1}(T_i)-b_{j-2}(T_i)|\le\delta_{j-1}$ for every $i$ and
 $|S_j-S_{j-1}|\le n\delta_{j-1}$. All of $S_j$, $S_{j-1}$ are at least $nc$. The first bracket is therefore at
 most $n\delta_{j-1}/(nc)^2\le\delta_{j-1}/(kc^2)$ in absolute value. The second term is at most
 $\rho\|y_{j-1}-y_{j-2}\|$. For the third, write $q\,w_i=\lambda b_i/(S(\lambda+S))$ with $b_i=e^{x_i}$, and let
-$b_i'$, $S'$ be the corresponding quantities one step earlier. Then
+$\tilde b_i$, $\tilde S$ be the corresponding quantities one step earlier. Then
 \begin{align*}
-  \sum_i\Bigl|\frac{b_i}{S(\lambda+S)}-\frac{b_i'}{S'(\lambda+S')}\Bigr|
-  &\le\frac{\sum_i|b_i-b_i'|}{S(\lambda+S)}+S'\,\Bigl|\frac1{S(\lambda+S)}-\frac1{S'(\lambda+S')}\Bigr|\\
-  &=\frac{\sum_i|b_i-b_i'|}{S(\lambda+S)}+\frac{|S-S'|\,(\lambda+S+S')}{S(\lambda+S)(\lambda+S')}
+  \sum_i\Bigl|\frac{b_i}{S(\lambda+S)}-\frac{\tilde b_i}{\tilde S(\lambda+\tilde S)}\Bigr|
+  &\le\frac{\sum_i|b_i-\tilde b_i|}{S(\lambda+S)}+\tilde S\,\Bigl|\frac1{S(\lambda+S)}-\frac1{\tilde S(\lambda+\tilde S)}\Bigr|\\
+  &=\frac{\sum_i|b_i-\tilde b_i|}{S(\lambda+S)}+\frac{|S-\tilde S|\,(\lambda+S+\tilde S)}{S(\lambda+S)(\lambda+\tilde S)}
   \le\frac{n\delta_{j-1}}{(nc)^2}+\frac{2n\delta_{j-1}}{(nc)^2},
 \end{align*}
-where the last step uses $\lambda+S+S'\le(\lambda+S)+(\lambda+S')$. Multiplying by $\lambda\le r$, the third
+where the last step uses $\lambda+S+\tilde S\le(\lambda+S)+(\lambda+\tilde S)$. Multiplying by $\lambda\le r$, the third
 term is at most $3r\delta_{j-1}M/(kc^2)$. Altogether, with $K=(1+3rM)/(kc^2)$ and
-$\eta_j=\|y_j-y_{j-1}\|$,
+$\theta_j=\|y_j-y_{j-1}\|$,
 \[
-   \eta_j\le\rho\,\eta_{j-1}+K\delta_{j-1}\le\rho\,\eta_{j-1}+K\rho^{j-1}\qquad(j\ge2),
+   \theta_j\le\rho\,\theta_{j-1}+K\delta_{j-1}\le\rho\,\theta_{j-1}+K\rho^{j-1}\qquad(j\ge2),
 \]
-and $\eta_1=\|y_1\|\le1/(k-r)$. By induction $\eta_j\le\rho^{j-1}\bigl(\eta_1+(j-1)K\bigr)$, so
-$\sum_j\eta_j<\infty$.
+and $\theta_1=\|y_1\|\le1/(k-r)$. By induction $\theta_j\le\rho^{j-1}\bigl(\theta_1+(j-1)K\bigr)$, so
+$\sum_j\theta_j<\infty$.
 
 \emph{Conclusion.} The functions $y_j$ converge uniformly on $\cT_k\times[0,r]$ to a function $y$ with
 $\|y\|\le M$. For fixed $T$ each $y_j(T,\cdot)$ is continuous on $[0,r]$, hence so is $y(T,\cdot)$. By
@@ -269,10 +271,10 @@ $y(T,0)=\partial_\lambda\beta_\lambda(T)|_{\lambda=0}$.
 
 \section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
 
-Let $T$ and $T'$ be independent Galton--Watson trees with offspring distribution $(p_k)$. Almost surely both
+Let $T$ and $\tilde T$ be independent Galton--Watson trees with offspring distribution $(p_k)$. Almost surely both
 belong to $\cT_{k_0}$, as do all the subtrees rooted at their vertices. For $0\le\lambda<k_0$ put
 \[
-   B_\lambda=\beta_\lambda(T'),\qquad C_\lambda=C_\lambda(T),\qquad
+   B_\lambda=\beta_\lambda(\tilde T),\qquad C_\lambda=C_\lambda(T),\qquad
    W_\lambda=\frac{B_\lambda C_\lambda}{\lambda-1+B_\lambda+C_\lambda},\qquad L_\lambda=\log(\lambda+C_\lambda).
 \]
 For $0<\lambda<m$ the same definitions make sense, with $\beta_\lambda$ and $C_\lambda$ related as
@@ -289,7 +291,7 @@ $\lambda=0$ as well.
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
 Fix $r\in(0,k_0)$ and let $c=1-r/k_0$ and $M=k_0/(k_0-r)^2$. Write $n=\nu(e)$ for the number of children of the
 root of $T$ and $D_\lambda=\lambda-1+B_\lambda+C_\lambda$. Primes denote derivatives in $\lambda$. By
-Proposition~\ref{prop:C1}, applied to $T'$ and to $T_1,\dots,T_n$, the functions $B_\lambda$ and $C_\lambda$ are
+Proposition~\ref{prop:C1}, applied to $\tilde T$ and to $T_1,\dots,T_n$, the functions $B_\lambda$ and $C_\lambda$ are
 continuously differentiable on $[0,r]$ and
 \[
    c\le B_\lambda\le1,\qquad cn\le C_\lambda\le n,\qquad |B_\lambda'|\le M,\qquad |C_\lambda'|\le nM .
@@ -324,17 +326,17 @@ $r<k_0$ was arbitrary, this proves the first assertion, and
 \end{equation}
 
 It remains to evaluate~\eqref{eq:quot} at $\lambda=0$. Let $N=\nu(e)$ be the number of children of the root of
-$T$, let $N_1,\dots,N_N$ be the numbers of children of these children, let $K$ be the number of children of the
-root of $T'$, and put $A=\sum_{i\le N}1/N_i$. By Proposition~\ref{prop:C1},
+$T$, let $N_1,\dots,N_N$ be the numbers of children of these children, let $\tilde N$ be the number of children of the
+root of $\tilde T$, and put $A=\sum_{i\le N}1/N_i$. By Proposition~\ref{prop:C1},
 \[
-   B_0=1,\quad B_0'=-\frac1K,\qquad C_0=N,\quad C_0'=-A,\qquad D_0=N,\quad D_0'=1-\frac1K-A .
+   B_0=1,\quad B_0'=-\frac1{\tilde N},\qquad C_0=N,\quad C_0'=-A,\qquad D_0=N,\quad D_0'=1-\frac1{\tilde N}-A .
 \]
 Substituting,
 \begin{equation}\label{eq:W0}
-   W_0'=\frac{-N/K-A}{N}-\frac{N(1-1/K-A)}{N^2}=-\frac1K-\Bigl(1-\frac1K\Bigr)\frac1N,\qquad
+   W_0'=\frac{-N/\tilde N-A}{N}-\frac{N(1-1/\tilde N-A)}{N^2}=-\frac1{\tilde N}-\Bigl(1-\frac1{\tilde N}\Bigr)\frac1N,\qquad
    L_0'=\frac{1-A}{N};
 \end{equation}
-the terms containing $A$ cancel in $W_0'$. Let $a=\E[1/N]$ and $\ell=\E[\log N]$. The variable $K$ is independent
+the terms containing $A$ cancel in $W_0'$. Let $a=\E[1/N]$ and $\ell=\E[\log N]$. The variable $\tilde N$ is independent
 of $N$, and given $N$ the $N_i$ are independent copies of $N$, so $\E[A\mid N]=Na$. Hence
 \[
    \E[L_0']=a-a=0,\qquad \E[W_0']=-2a+a^2,\qquad
@@ -347,12 +349,12 @@ With $W_0=1$, $L_0=\log N$ and $d_0=\ell$, formula~\eqref{eq:quot} gives
 \]
 which is~\eqref{eq:slope}.
 
-For the sign, let $N$ and $K$ be independent with law $(p_k)$. Then
+For the sign, let $N$ and $\tilde N$ be independent with law $(p_k)$. Then
 \[
-   -2\Cov\bigl(\log N,1/N\bigr)=\E\Bigl[\bigl(\log N-\log K\bigr)\Bigl(\frac1K-\frac1N\Bigr)\Bigr].
+   -2\Cov\bigl(\log N,1/N\bigr)=\E\Bigl[\bigl(\log N-\log\tilde N\bigr)\Bigl(\frac1{\tilde N}-\frac1N\Bigr)\Bigr].
 \]
-The integrand is nonnegative, since the logarithm is increasing and $x\mapsto1/x$ is decreasing, and it is
-strictly positive on the event $\{N\ne K\}$, which has positive probability because $N$ is not constant. Finally
+The integrand is nonnegative, since the logarithm is increasing and $s\mapsto1/s$ is decreasing, and it is
+strictly positive on the event $\{N\ne\tilde N\}$, which has positive probability because $N$ is not constant. Finally
 $a<1$ because $\Prob(N\ge2)>0$. Hence $d_0'>0$.
 \end{proof}
 
@@ -361,9 +363,9 @@ By Theorem~\ref{thm:main} the derivative of $d_\lambda$ is continuous on $[0,k_0
 positive on some interval $[0,\eps]$.
 \end{proof}
 
-\begin{remark}
+\begin{remark}\label{rem:Q}
 Let $Q_\lambda$ be the probability measure with density $W_\lambda/\E[W_\lambda]$ with respect to the law of
-$(T,T')$. Formula~\eqref{eq:quot} reads
+$(T,\tilde T)$. Formula~\eqref{eq:quot} reads
 \[
    d_\lambda'=\E_{Q_\lambda}\Bigl[\frac{1+C_\lambda'}{\lambda+C_\lambda}\Bigr]
      +\Cov_{Q_\lambda}\Bigl(\log(\lambda+C_\lambda),\frac{W_\lambda'}{W_\lambda}\Bigr)\qquad(0\le\lambda<k_0).
@@ -378,9 +380,14 @@ second equals~\eqref{eq:slope}.
 Formula~\eqref{eq:lin} can be evaluated by simulation of the recursion~\eqref{eq:beta}. A pool of $2\times10^5$
 pairs, representing samples of $(\beta_\lambda(T),\partial_\lambda\beta_\lambda(T))$, is initialised at $(1,0)$
 and updated $300$ times: every new pair is computed from~\eqref{eq:beta} and its derivative in $\lambda$, with an
-independent offspring number and children drawn independently and uniformly from the current pool. The
-expectations in~\eqref{eq:lin} and~\eqref{eq:quot} are then replaced by averages over the pool. Each run was
-repeated with six seeds, and the same seeds were used for every $\lambda$.
+independent offspring number and children drawn independently and uniformly from the current pool. For the
+evaluation, $2\times10^5$ roots are drawn, each with a fresh offspring number and children taken from the final
+pool, which give $C_\lambda$ and $C_\lambda'$, and with one further independent element of the pool, which gives
+$B_\lambda$ and $B_\lambda'$. The expectations in~\eqref{eq:lin} and~\eqref{eq:quot} are replaced by averages over
+these roots; only the final pool is used. Each run was repeated with the six seeds $1000,\dots,1005$, and for a
+given seed the same random numbers were used for every $\lambda$, so that the runs at different values of
+$\lambda$ are coupled. Every $\pm$ below is the sample standard deviation of the six seed results divided by
+$\sqrt6$. The program and its output are in the repository listed at the end of the paper.
 
 The bias runs over the grid $\lambda/m\in\{0,\,0.02,\,0.05,\,0.1,\,0.2,\dots,0.9\}$, for the four offspring
 distributions of Tables~\ref{tab:slope} and~\ref{tab:dim}.
@@ -395,7 +402,7 @@ $p_k=2^{-k}$ & 2.000 & 0.50783 & 0.05496 & $0.05572\pm0.00062$ & $0.05677\pm0.00
 \bottomrule\end{tabular}
 \caption{The slope at $\lambda=0$. The fourth column is~\eqref{eq:slope}, the fifth is the pool average of the
 right-hand side of~\eqref{eq:quot} at $\lambda=0$, and the last is $(d_{\lambda}-d_0)/\lambda$ at
-$\lambda=0.02\,m$; the last two are means over six seeds with their standard errors.}\label{tab:slope}
+$\lambda=0.02\,m$, with both terms pool estimates for the same seed; the last two are means over six seeds with their standard errors.}\label{tab:slope}
 \end{table}
 
 \begin{table}[ht]\centering\footnotesize\setlength{\tabcolsep}{4pt}
@@ -406,12 +413,15 @@ $p_2=p_4=\tfrac12$ & 1.0394 & 1.0475 & 1.0556 & 1.0636 & 1.0713 & 1.0785 & 1.085
 $p_1=p_2=p_3=\tfrac13$ & 0.5978 & 0.6080 & 0.6190 & 0.6310 & 0.6436 & 0.6561 & 0.6676 & 0.6775 & 0.6854 & 0.6909 \\
 $p_k=2^{-k}$ & 0.5080 & 0.5203 & 0.5356 & 0.5548 & 0.5786 & 0.6056 & 0.6324 & 0.6559 & 0.6747 & 0.6878 \\
 \bottomrule\end{tabular}
-\caption{Estimates of $d_\lambda$, means over six seeds. The standard errors, over the whole grid, are at most
+\caption{Estimates of $d_\lambda$, means over six seeds. The column $\lambda=0$ is the pool estimate, to be compared
+with the exact $d_0$ of Table~\ref{tab:slope}. The standard errors, over the whole grid, are at most
 $0.00050$.}\label{tab:dim}
 \end{table}
 
 In Table~\ref{tab:slope} the pool averages agree with~\eqref{eq:slope} to within one and a half standard errors,
-and the difference quotients, taken at the positive bias $0.02\,m$, are within $0.002$ of it. In Table~\ref{tab:dim} the estimates increase along the grid and stay below
+and the difference quotients, taken at the positive bias $0.02\,m$, are within $0.002$ of it. A difference
+quotient at positive bias exceeds $d_0'$ by about $0.01\,m\,d_0''$; for the geometric law $d_0''$ is about $0.052$,
+which accounts for $0.0010$ of the difference $0.0018$ there. In Table~\ref{tab:dim} the estimates increase along the grid and stay below
 $\log m$, which equals $0.4055$, $1.0986$, $0.6931$ and $0.6931$ for the four distributions. The increase holds
 for every one of the six seeds and every pair of consecutive grid points. This agrees with the computations
 of~\cite{Rousselin} and with a positive answer to the question of~\cite{LPP97} on the whole interval $[0,m)$,
@@ -441,7 +451,8 @@ The paper comes out of Math Brain, an ongoing project on the use of AI systems f
 results were developed with the Brain~\cite{BrainFramework} and Math Brain~\cite{MathBrainRepo}. In October 2026
 AI agents working from the project's list of open problems in probability obtained Theorem~\ref{thm:main} and
 proofs of it, and a further agent checked the arguments. In November 2026 a
-Claude Fable agent (Anthropic) checked the proof again, wrote the simulation program and prepared the manuscript.
+Claude Fable agent (Anthropic) checked the proof again, wrote the simulation program and prepared the manuscript. GPT-6.1 in Codex (OpenAI) then checked
+the proofs and recomputed the numerical tables independently.
 These checks are not peer review. The author directed the work and is responsible for the content of the paper and
 for decisions concerning its dissemination.
 
@@ -452,38 +463,85 @@ Programs and outputs:\\
 The paper is part of the Math Brain project, whose public repository is
 \url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
 
+\appendix
+\section{Notation}\label{app:notation}
+Symbols are listed in the order in which they first appear. Primes denote derivatives in $\lambda$.
+
+{\small\begin{longtable}{@{}lp{0.5\textwidth}p{0.27\textwidth}@{}}\toprule
+Symbol & Meaning & First appears\\ \midrule\endhead
+$(p_k)$, $m$ & the offspring distribution and its mean $m=\sum_kkp_k$ & Section~\ref{sec:intro}\\
+$N$ & a random variable with law $(p_k)$; in Section~\ref{sec:proof}, the number of children of the root of $T$ & Section~\ref{sec:intro}\\
+$T$, $e$ & a Galton--Watson tree with offspring distribution $(p_k)$, and its root & Section~\ref{sec:intro}\\
+$\nu(v)$ & the number of children of a vertex $v$ & Section~\ref{sec:intro}\\
+$k_0$ & the smallest possible number of children, $\min\{k\ge1:p_k>0\}$ & Section~\ref{sec:intro}\\
+$\lambda$ & the bias: the walk moves from $v$ to its parent with probability $\lambda/(\lambda+\nu(v))$ & Section~\ref{sec:intro}\\
+$\partial T$, $\xi$, $\eta$ & the boundary of $T$ and two rays of $T$ & Section~\ref{sec:intro}\\
+$\operatorname{dist}$ & the metric $e^{-|\xi\wedge\eta|}$ on $\partial T$ & Section~\ref{sec:intro}\\
+$d_\lambda$ & the Hausdorff dimension of the $\lambda$-harmonic measure & Section~\ref{sec:intro}\\
+$\E$, $\Prob$, $\Cov$ & expectation, probability and covariance & Section~\ref{sec:intro}\\
+$d_\lambda'$, $d_0'$, $d_0''$ & derivatives of $d_\lambda$ in $\lambda$, and their values at $\lambda=0$ & Theorem~\ref{thm:main}\\
+$\eps$ & the length of the interval in Corollary~\ref{cor:mono} & Corollary~\ref{cor:mono}\\
+$C_\lambda(T)$ & $\sum_{i\le n}\beta_\lambda(T_i)$, the effective conductance of $T$, defined in~\eqref{eq:beta} & Remark~\ref{rem:tilt}\\
+$W_\lambda$ & the weight in the formula of Lin and Rousselin, defined in Section~\ref{sec:proof} & Remark~\ref{rem:tilt}\\
+$\cT_k$, $k$ & the rooted trees in which every vertex has finitely many and at least $k$ children & Section~\ref{sec:escape}\\
+$T_*$, $e_*$ & $T$ with a new vertex $e_*$ joined to its root as the root's parent & Section~\ref{sec:escape}\\
+$b_j(T,\lambda)$ & the probability that the walk on $T_*$ from $e$ reaches generation $j$ of $T$ before $e_*$ & Section~\ref{sec:escape}\\
+$\beta_\lambda(T)$ & the probability that the walk on $T_*$ from $e$ never visits $e_*$ & Section~\ref{sec:escape}\\
+$n$, $T_1,\dots,T_n$ & the number of children of the root, and the subtrees rooted at them & Section~\ref{sec:escape}\\
+$S$ & $\sum_{i\le n}b_{j-1}(T_i,\lambda)$; in the proof of Proposition~\ref{prop:C1}, $S(x)=\sum_ie^{x_i}$ & Lemma~\ref{lem:rec}\\
+$r$, $c$, $M$ & $0<r<k$, $c=1-r/k$, $M=k/(k-r)^2$ & Proposition~\ref{prop:C1}\\
+$\|\cdot\|$ & the supremum over $T\in\cT_k$ and $\lambda\in[0,r]$ & proof of Proposition~\ref{prop:C1}\\
+$\rho$ & $r/k$ & proof of Proposition~\ref{prop:C1}\\
+$x_j$, $x$ & $\log b_j$; a point of the cube $[\log c,0]^n$ & proof of Proposition~\ref{prop:C1}\\
+$H_\lambda$ & $\log S(x)-\log(\lambda+S(x))$, the recursion in logarithmic coordinates & proof of Proposition~\ref{prop:C1}\\
+$q$, $w_i$ & $\lambda/(\lambda+S)$ and $e^{x_i}/S$ & \eqref{eq:partials}\\
+$\delta_j$ & $\|x_j-x_{j-1}\|$ & proof of Proposition~\ref{prop:C1}\\
+$y_j$, $y$ & $\partial_\lambda x_j$ and its limit & proof of Proposition~\ref{prop:C1}\\
+$S_j$, $q_j$, $w_{j,i}$ & $S$, $q$, $w_i$ computed from $(x_{j-1}(T_i,\lambda))_{i\le n}$ & \eqref{eq:yrec}\\
+$b_i$, $\tilde b_i$, $\tilde S$ & $e^{x_i}$, and $b_i$ and $S$ one step earlier & proof of Proposition~\ref{prop:C1}\\
+$K$, $\theta_j$ & $(1+3rM)/(kc^2)$ and $\|y_j-y_{j-1}\|$ & proof of Proposition~\ref{prop:C1}\\
+$\tilde T$ & a Galton--Watson tree independent of $T$ & Section~\ref{sec:proof}\\
+$B_\lambda$, $L_\lambda$, $D_\lambda$ & $\beta_\lambda(\tilde T)$, $\log(\lambda+C_\lambda)$, $\lambda-1+B_\lambda+C_\lambda$ & Section~\ref{sec:proof}\\
+$\kappa$ & $\max(\log(1+r),\log(1/c))$ & proof of Theorem~\ref{thm:main}\\
+$N_i$, $\tilde N$, $A$ & the numbers of children of the children of the root of $T$, of the root of $\tilde T$, and $\sum_{i\le N}1/N_i$ & proof of Theorem~\ref{thm:main}\\
+$a$, $\ell$ & $\E[1/N]$ and $\E[\log N]$ & proof of Theorem~\ref{thm:main}\\
+$Q_\lambda$ & the probability measure with density $W_\lambda/\E[W_\lambda]$ with respect to the law of $(T,\tilde T)$ & Remark~\ref{rem:Q}\\
+\bottomrule\end{longtable}}
+
 \begin{thebibliography}{99}
 \bibitem{Aidekon} E.~A\"{\i}d\'ekon, Speed of the biased random walk on a Galton--Watson tree,
-\emph{Probab. Theory Related Fields} \textbf{159} (2014), 597--617.
+\emph{Probab. Theory Related Fields} \textbf{159} (2014), 597--617, doi:10.1007/s00440-013-0515-y.
 \bibitem{BFS} G.~Ben Arous, A.~Fribergh and V.~Sidoravicius, Lyons--Pemantle--Peres monotonicity problem for high
-biases, \emph{Comm. Pure Appl. Math.} \textbf{67} (2014), 519--530.
+biases, \emph{Comm. Pure Appl. Math.} \textbf{67} (2014), 519--530, doi:10.1002/cpa.21505.
 \bibitem{BHOZ} G.~Ben Arous, Y.~Hu, S.~Olla and O.~Zeitouni, Einstein relation for biased random walk on
-Galton--Watson trees, \emph{Ann. Inst. Henri Poincar\'e Probab. Stat.} \textbf{49} (2013), 698--721.
+Galton--Watson trees, \emph{Ann. Inst. Henri Poincar\'e Probab. Stat.} \textbf{49} (2013), 698--721, doi:10.1214/12-AIHP486.
 \bibitem{BT} A.~Bowditch and Y.~Tokushige, Differentiability of the speed of biased random walks on
-Galton--Watson trees, \emph{ALEA Lat. Am. J. Probab. Math. Stat.} \textbf{17} (2020), 609--642.
+Galton--Watson trees, \emph{ALEA Lat. Am. J. Probab. Math. Stat.} \textbf{17} (2020), 609--642, doi:10.30757/ALEA.v17-24.
 \bibitem{Lin} S.~Lin, Harmonic measure for biased random walk in a supercritical Galton--Watson tree,
-\emph{Bernoulli} \textbf{25} (2019), 3652--3672.
+\emph{Bernoulli} \textbf{25} (2019), 3652--3672, doi:10.3150/19-BEJ1106.
 \bibitem{Lyons90} R.~Lyons, Random walks and percolation on trees, \emph{Ann. Probab.} \textbf{18} (1990),
-931--958.
+931--958, doi:10.1214/aop/1176990730.
 \bibitem{LPP95} R.~Lyons, R.~Pemantle and Y.~Peres, Ergodic theory on Galton--Watson trees: speed of random walk
-and dimension of harmonic measure, \emph{Ergodic Theory Dynam. Systems} \textbf{15} (1995), 593--619.
+and dimension of harmonic measure, \emph{Ergodic Theory Dynam. Systems} \textbf{15} (1995), 593--619, doi:10.1017/S0143385700008543.
 \bibitem{LPP96} R.~Lyons, R.~Pemantle and Y.~Peres, Biased random walks on Galton--Watson trees,
-\emph{Probab. Theory Related Fields} \textbf{106} (1996), 249--264.
+\emph{Probab. Theory Related Fields} \textbf{106} (1996), 249--264, doi:10.1007/s004400050064.
 \bibitem{LPP97} R.~Lyons, R.~Pemantle and Y.~Peres, Unsolved problems concerning random walks on trees, in
-\emph{Classical and Modern Branching Processes}, IMA Vol. Math. Appl. \textbf{84}, Springer, 1997, 223--237.
+\emph{Classical and Modern Branching Processes}, IMA Vol. Math. Appl. \textbf{84}, Springer, 1997, 223--237, doi:10.1007/978-1-4612-1862-3\_18.
 \bibitem{LyonsPeres} R.~Lyons and Y.~Peres, \emph{Probability on Trees and Networks}, Cambridge University Press,
-2016. Question numbers are those of the version on the first author's web page.
+2016, doi:10.1017/9781316672815. Question numbers are those of the version of 19 August 2026 on the first
+author's web page.
 \bibitem{MSZ} B.~Mehrdad, S.~Sen and L.~Zhu, The speed of a biased walk on a Galton--Watson tree without leaves is
 monotonic with respect to progeny distributions for high values of bias, \emph{Ann. Inst. Henri Poincar\'e
-Probab. Stat.} \textbf{51} (2015), 304--318.
+Probab. Stat.} \textbf{51} (2015), 304--318, doi:10.1214/13-AIHP573.
 \bibitem{Rousselin} P.~Rousselin, Invariant measures, Hausdorff dimension and dimension drop of some harmonic
-measures on Galton--Watson trees, \emph{Electron. J. Probab.} \textbf{23} (2018), paper no.~46, 1--31.
+measures on Galton--Watson trees, \emph{Electron. J. Probab.} \textbf{23} (2018), 1--31, doi:10.1214/18-EJP170.
 \bibitem{SWX} H.~Song, L.~Wang and K.~Xiang, The speed of a biased walk on a Galton--Watson tree without leaves is
-monotonic for low values of bias, \emph{J. Appl. Probab.} \textbf{62} (2025), 1044--1052.
+monotonic for low values of bias, \emph{J. Appl. Probab.} \textbf{62} (2025), 1044--1052, doi:10.1017/jpr.2024.113.
 \bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026,
 \url{https://github.com/yspennstate/math-brain-public}.
 \bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical research},
-October 2026, \url{https://github.com/yspennstate/math-brain-public/tree/main/papers/math-brain-2026-10-24}.
+October 2026, \url{https://github.com/yspennstate/math-brain-public/tree/main/papers/math-brain-2026-10-24},
+archived with doi:10.5281/zenodo.24150837.
 \bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026,
 \url{https://github.com/yspennstate/brain-framework-public}.
 \end{thebibliography}
